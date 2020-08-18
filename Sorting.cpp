@@ -50,6 +50,20 @@ void bubbleSort(int array[], int size) {
   }
 }
 
+/* =================================== INSERTION SORT =================================== */
+
+void insertionSort(int array[], int size) {
+  for (int step = 1; step < size; step++) {
+    int key = array[step];
+    int j = step - 1;
+    while (key < array[j] && j >= 0) {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = key;
+  }
+}
+
 int main() {
   cout << "Enter the number of elements in array: ";
   cin >> size;
@@ -58,22 +72,25 @@ int main() {
   for (int count = 0; count < size; count++)
     cin >> data[count];
   int choice;  
-  cout << "Enter your choice to select a sorting technique.\n \n1--> Quick sort \n2--> BubbleSort\n \nYour Choice: ";
+  cout << "Enter your choice to select a sorting technique.\n \n1--> Quick Sort \n2--> Bubble Sort \n3--> Insertion Sort\n \nYour Choice: ";
  cin >> choice;
- switch (choice)
- {
- case 1:
-  cout << "\nUsing Quick Sort ...." << endl;
-  quickSort(data, 0, size - 1);
-   break;
- case 2:
-  cout << "\nUsing Bubble Sort ...." << endl;
-  bubbleSort(data, size - 1);
+ switch (choice) {
+  case 1:
+    cout << "\nUsing Quick Sort ...." << endl;
+    quickSort(data, 0, size - 1);
+  break;
+  case 2:
+    cout << "\nUsing Bubble Sort ...." << endl;
+    bubbleSort(data, size - 1);
+  break;
+  case 3:
+    cout << "\nUsing Insertion Sort ...." << endl;
+    insertionSort(data, size - 1);
   break;  
- default:
-  cout << "\nInvalid Input, Using Quick Sort ...." << endl ;
-  quickSort(data, 0, size - 1);
-   break;
+  default:
+    cout << "\nInvalid Input, Using Quick Sort ...." << endl ;
+    quickSort(data, 0, size - 1);
+    break;
  }
   
   cout << "\nSorted array in ascending order:";
