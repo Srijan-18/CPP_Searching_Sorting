@@ -1,5 +1,7 @@
 #include <iostream>
+
 using namespace std;
+
 int size;
 void swap(int *a, int *b) {
   int t = *a;
@@ -12,6 +14,8 @@ void printArray(int array[], int size) {
     cout << array[indexToswap] << " ";
   cout << endl;
 }
+
+/* =================================== QUICK SORT =================================== */ 
 
 int partition(int array[], int low, int high) {
   int pivot = array[high];
@@ -29,20 +33,49 @@ int partition(int array[], int low, int high) {
 
 void quickSort(int array[], int low, int high) {
   if (low < high) {
-    int pi = partition(array, low, high);
-    quickSort(array, low, pi - 1);
-    quickSort(array, pi + 1, high);
+    int partitionIndex = partition(array, low, high);
+    quickSort(array, low, partitionIndex - 1);
+    quickSort(array, partitionIndex + 1, high);
+  }
+}
+
+/* =================================== BUBBLE SORT =================================== */
+
+void bubbleSort(int array[], int size) {
+  for (int step = 0; step < size - 1; ++step) {
+    for (int i = 0; i < size - step - 1; ++i) {
+      if (array[i] > array[i + 1]) 
+        swap(&array[i], &array[i + 1]);
+    }
   }
 }
 
 int main() {
-  cout << "Enter the number of elements in array:";
+  cout << "Enter the number of elements in array: ";
   cin >> size;
   int data[size];
-  cout << "Enter the elements :";
+  cout << "Enter the elements:" << endl;
   for (int count = 0; count < size; count++)
     cin >> data[count];
+  int choice;  
+  cout << "Enter your choice to select a sorting technique.\n \n1--> Quick sort \n2--> BubbleSort\n \nYour Choice: ";
+ cin >> choice;
+ switch (choice)
+ {
+ case 1:
+  cout << "\nUsing Quick Sort ...." << endl;
   quickSort(data, 0, size - 1);
-  cout << "Sorted array in ascending order: \n";
+   break;
+ case 2:
+  cout << "\nUsing Bubble Sort ...." << endl;
+  bubbleSort(data, size - 1);
+  break;  
+ default:
+  cout << "\nInvalid Input, Using Quick Sort ...." << endl ;
+  quickSort(data, 0, size - 1);
+   break;
+ }
+  
+  cout << "\nSorted array in ascending order:";
   printArray(data, size);
 }
